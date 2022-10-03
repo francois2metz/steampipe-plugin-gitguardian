@@ -15,6 +15,12 @@ func tableGitguardianSecretIncident(ctx context.Context) *plugin.Table {
 		Description: "List secret incidents detected by the GitGuardian dashboard.",
 		List: &plugin.ListConfig{
 			Hydrate: listSecretIncident,
+			KeyColumns: []*plugin.KeyColumn{
+				{Name: "assignee_email", Require: plugin.Optional},
+				{Name: "status", Require: plugin.Optional},
+				{Name: "severity", Require: plugin.Optional},
+				{Name: "validity", Require: plugin.Optional},
+			},
 		},
 		Get: &plugin.GetConfig{
 			KeyColumns: plugin.SingleColumn("id"),
@@ -117,7 +123,19 @@ func listSecretIncident(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 		plugin.Logger(ctx).Error("gitguardian_secret_incident.listSecretIncident", "connection_error", err)
 		return nil, err
 	}
-	opts := incidents.ListOptions{}
+	perPage := 100
+	quals := d.KeyColumnQuals
+	assigneeEmail := quals["assignee_email"].GetStringValue()
+	status := incidents.IncidentsListStatus(quals["status"].GetStringValue())
+	severity := incidents.IncidentsListSeverity(quals["severity"].GetStringValue())
+	validity := incidents.IncidentsListValidity(quals["validity"].GetStringValue())
+	opts := incidents.ListOptions{
+		AssigneeEmail: assigneeEmail,
+		PerPage:       &perPage,
+		Severity:      &severity,
+		Status:        &status,
+		Validity:      &validity,
+	}
 	for {
 		result, pagination, err := c.List(opts)
 		if err != nil {
