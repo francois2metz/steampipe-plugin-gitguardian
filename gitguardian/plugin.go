@@ -16,6 +16,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		},
 		TableMap: map[string]*plugin.Table{
 			"gitguardian_secret_incident": tableGitguardianSecretIncident(ctx),
+			"gitguardian_source":          tableGitguardianSource(ctx),
 		},
 	}
 	return p

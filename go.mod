@@ -2,7 +2,7 @@ module github.com/francois2metz/steampipe-plugin-gitguardian
 
 go 1.19
 
-replace github.com/Gaardsholt/go-gitguardian => github.com/francois2metz/go-gitguardian v0.1.1-0.20221007120502-7987c59d81c9
+replace github.com/Gaardsholt/go-gitguardian => github.com/francois2metz/go-gitguardian v0.1.1-0.20221007133649-1013d5194dbe
 
 require (
 	github.com/Gaardsholt/go-gitguardian v0.1.1-0.20220731201908-6eb47e0359fb
