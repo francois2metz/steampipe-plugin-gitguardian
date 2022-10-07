@@ -17,8 +17,9 @@ func tableGitguardianSecretIncident(ctx context.Context) *plugin.Table {
 			Hydrate: listSecretIncident,
 			KeyColumns: []*plugin.KeyColumn{
 				{Name: "assignee_email", Require: plugin.Optional},
-				{Name: "status", Require: plugin.Optional},
+				{Name: "date", Operators: []string{">", ">=", "=", "<", "<="}, Require: plugin.Optional},
 				{Name: "severity", Require: plugin.Optional},
+				{Name: "status", Require: plugin.Optional},
 				{Name: "validity", Require: plugin.Optional},
 			},
 		},
@@ -129,12 +130,28 @@ func listSecretIncident(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 	status := incidents.IncidentsListStatus(quals["status"].GetStringValue())
 	severity := incidents.IncidentsListSeverity(quals["severity"].GetStringValue())
 	validity := incidents.IncidentsListValidity(quals["validity"].GetStringValue())
+	date := d.Quals["date"]
+
 	opts := incidents.ListOptions{
 		AssigneeEmail: assigneeEmail,
 		PerPage:       &perPage,
 		Severity:      &severity,
 		Status:        &status,
 		Validity:      &validity,
+	}
+	if date != nil {
+		for _, q := range date.Quals {
+			timestamp := q.Value.GetTimestampValue().AsTime()
+			switch q.Operator {
+			case "=":
+				opts.DateBefore = &timestamp
+				opts.DateAfter = &timestamp
+			case ">=", ">":
+				opts.DateAfter = &timestamp
+			case "<", "<=":
+				opts.DateBefore = &timestamp
+			}
+		}
 	}
 	for {
 		result, pagination, err := c.List(opts)

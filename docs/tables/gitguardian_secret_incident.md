@@ -55,3 +55,16 @@ from
 order by
   occurrences_count desc
 ```
+
+### Get last month incidents
+
+```sql
+select
+  id,
+  date,
+  status
+from
+  gitguardian_secret_incident
+where
+  date>(current_date - interval '1' month)
+```
