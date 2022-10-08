@@ -65,13 +65,14 @@ connection "gitguardian" {
   # Create a personal access token at: https://dashboard.gitguardian.com/api
   # Scope:
   #  - incidents:read
+  #  - audit_logs:read
   # token = ""
 }
 ```
 
 You can also use environment variables:
 
-- `GITGUARDIAN_TOKEN`: Your gitguardian API Key
+- `GITGUARDIAN_TOKEN`: Your Gitguardian API Key
 
 ## Get Involved
 
