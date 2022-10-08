@@ -91,6 +91,9 @@ func listSource(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 		return nil, err
 	}
 	perPage := 100
+	if d.QueryContext.Limit != nil && *d.QueryContext.Limit < int64(perPage) {
+		perPage = int(*d.QueryContext.Limit)
+	}
 
 	opts := sources.ListOptions{
 		PerPage: &perPage,
@@ -108,6 +111,9 @@ func listSource(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 			break
 		}
 		opts.Cursor = pagination.NextCursor
+		if d.QueryStatus.RowsRemaining(ctx) <= 0 {
+			break
+		}
 	}
 	return nil, nil
 }

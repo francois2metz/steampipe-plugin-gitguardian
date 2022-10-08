@@ -132,6 +132,10 @@ func listSecretIncident(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 	validity := incidents.IncidentsListValidity(quals["validity"].GetStringValue())
 	date := d.Quals["date"]
 
+	if d.QueryContext.Limit != nil && *d.QueryContext.Limit < int64(perPage) {
+		perPage = int(*d.QueryContext.Limit)
+	}
+
 	opts := incidents.ListOptions{
 		AssigneeEmail: assigneeEmail,
 		PerPage:       &perPage,
@@ -166,6 +170,9 @@ func listSecretIncident(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 			break
 		}
 		opts.Cursor = pagination.NextCursor
+		if d.QueryStatus.RowsRemaining(ctx) <= 0 {
+			break
+		}
 	}
 	return nil, nil
 }
