@@ -14,7 +14,13 @@ func tableGitguardianAuditLog(ctx context.Context) *plugin.Table {
 		Description: "List audit logs.",
 		List: &plugin.ListConfig{
 			Hydrate:    listAuditLog,
-			KeyColumns: []*plugin.KeyColumn{},
+			KeyColumns: []*plugin.KeyColumn{
+				{Name: "date", Operators: []string{">", ">=", "=", "<", "<="}, Require: plugin.Optional},
+				{Name: "event_name", Require: plugin.Optional},
+				{Name: "member_id", Require: plugin.Optional},
+				{Name: "member_name", Require: plugin.Optional},
+				{Name: "member_email", Require: plugin.Optional},
+			},
 		},
 		Columns: []*plugin.Column{
 			{
@@ -83,6 +89,12 @@ func listAuditLog(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateDat
 		return nil, err
 	}
 	perPage := 100
+	quals := d.KeyColumnQuals
+	eventName := quals["event_name"].GetStringValue()
+	memberId := quals["member_id"]
+	memberName := quals["member_name"].GetStringValue()
+	memberEmail := quals["member_email"].GetStringValue()
+	date := d.Quals["date"]
 
 	if d.QueryContext.Limit != nil && *d.QueryContext.Limit < int64(perPage) {
 		perPage = int(*d.QueryContext.Limit)
@@ -90,6 +102,28 @@ func listAuditLog(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateDat
 
 	opts := auditlogs.AuditLogsListOptions{
 		PerPage: &perPage,
+		EventName: eventName,
+		MemberName: memberName,
+		MemberEmail: memberEmail,
+	}
+	if memberId != nil {
+		memberId := int(memberId.GetInt64Value())
+		opts.MemberId = &memberId
+	}
+
+	if date != nil {
+		for _, q := range date.Quals {
+			timestamp := q.Value.GetTimestampValue().AsTime()
+			switch q.Operator {
+			case "=":
+				opts.DateBefore = &timestamp
+				opts.DateAfter = &timestamp
+			case ">=", ">":
+				opts.DateAfter = &timestamp
+			case "<", "<=":
+				opts.DateBefore = &timestamp
+			}
+		}
 	}
 	for {
 		result, pagination, err := c.List(opts)
