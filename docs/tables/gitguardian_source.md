@@ -11,7 +11,7 @@ select
   id,
   url
 from
-  gitguardian_source
+  gitguardian_source;
 ```
 
 ### List at risk sources
@@ -24,7 +24,7 @@ select
 from
   gitguardian_source
 where
-  health='at_risk'
+  health='at_risk';
 ```
 
 ### List unscanned sources
@@ -37,5 +37,5 @@ select
 from
   gitguardian_source
 where
-  last_scan_date is null
+  last_scan_date is null;
 ```

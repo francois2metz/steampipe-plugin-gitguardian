@@ -12,7 +12,7 @@ select
   date,
   status
 from
-  gitguardian_secret_incident
+  gitguardian_secret_incident;
 ```
 
 ### List open incidents
@@ -25,7 +25,7 @@ select
 from
   gitguardian_secret_incident
 where
-  status in ('TRIGGERED', 'ASSIGNED')
+  status in ('TRIGGERED', 'ASSIGNED');
 ```
 
 ### List shared incidents
@@ -39,7 +39,7 @@ select
 from
   gitguardian_secret_incident
 where
-  share_url is not null
+  share_url is not null;
 ```
 
 ### Get incidents sorted by the number of occurrences
@@ -53,7 +53,7 @@ select
 from
   gitguardian_secret_incident
 order by
-  occurrences_count desc
+  occurrences_count desc;
 ```
 
 ### Get last month incidents
@@ -66,5 +66,5 @@ select
 from
   gitguardian_secret_incident
 where
-  date>(current_date - interval '1' month)
+  date>(current_date - interval '1' month);
 ```

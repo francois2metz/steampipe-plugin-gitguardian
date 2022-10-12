@@ -15,7 +15,7 @@ select
 from
   gitguardian_audit_log
 order by
-  date
+  date;
 ```
 
 ### List delete events
@@ -29,7 +29,7 @@ select
 from
   gitguardian_audit_log
 where
-  action_type='DELETE'
+  action_type='DELETE';
 ```
 
 ### List actions from a user
@@ -43,5 +43,5 @@ select
 from
   gitguardian_audit_log
 where
-  member_email='test@example.net'
+  member_email='test@example.net';
 ```

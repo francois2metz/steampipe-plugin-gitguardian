@@ -24,7 +24,7 @@ select
   date,
   status
 from
-  gitguardian_secret_incident
+  gitguardian_secret_incident;
 ```
 
 ```
