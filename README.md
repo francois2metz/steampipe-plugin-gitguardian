@@ -1,6 +1,6 @@
-# Gitguardian plugin for Steampipe
+# GitGuardian plugin for Steampipe
 
-Use SQL to query incidents from [Gitguardian][].
+Use SQL to query incidents from [GitGuardian][].
 
 - **[Get started →](docs/index.md)**
 - Documentation: [Table definitions & examples](docs/tables)

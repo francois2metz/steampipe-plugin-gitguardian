@@ -2,17 +2,17 @@
 organization: francois2metz
 category: ["security"]
 brand_color: "#081736"
-display_name: "Gitguardian"
+display_name: "GitGuardian"
 short_name: "gitguardian"
-description: "Steampipe plugin for querying incidents from Gitguardian."
-og_description: "Query Gitguardian with SQL! Open source CLI. No DB required."
+description: "Steampipe plugin for querying incidents from GitGuardian."
+og_description: "Query GitGuardian with SQL! Open source CLI. No DB required."
 og_image: "/images/plugins/francois2metz/gitguardian-social-graphic.png"
 icon_url: "/images/plugins/francois2metz/gitguardian.svg"
 ---
 
-# Gitguardian + Steampipe
+# GitGuardian + Steampipe
 
-[Gitguardian](https://www.gitguardian.com/) is a secret scanner of GitHhub or GitLab commits.
+[GitGuardian](https://www.gitguardian.com/) is a secret scanner of GitHub or GitLab commits.
 
 [Steampipe](https://steampipe.io) is an open source CLI to instantly query cloud APIs using SQL.
 
@@ -48,7 +48,7 @@ from
 
 ### Install
 
-Download and install the latest Gitguardian plugin:
+Download and install the latest GitGuardian plugin:
 
 ```bash
 steampipe plugin install francois2metz/gitguardian
@@ -72,7 +72,7 @@ connection "gitguardian" {
 
 You can also use environment variables:
 
-- `GITGUARDIAN_TOKEN`: Your Gitguardian API Key
+- `GITGUARDIAN_TOKEN`: Your GitGuardian API Key
 
 ## Get Involved
 
