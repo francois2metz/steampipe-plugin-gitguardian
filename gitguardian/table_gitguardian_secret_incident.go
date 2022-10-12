@@ -66,7 +66,7 @@ func tableGitguardianSecretIncident(ctx context.Context) *plugin.Table {
 			{
 				Name:        "occurrences_count",
 				Type:        proto.ColumnType_INT,
-				Description: "Number of occurences.",
+				Description: "Number of occurrences.",
 				Transform:   transform.FromField("OccurrencesCount"),
 			},
 			{
