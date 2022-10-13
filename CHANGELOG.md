@@ -9,4 +9,6 @@ _What's new?_
 
 _What's new?_
 
-- Initial release
+- Initial release with 2 tables:
+  - `gitguardian_secret_incident`
+  - `gitguardian_source`
