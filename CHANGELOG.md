@@ -1,3 +1,11 @@
+## v0.0.3 [2022-10-20]
+
+_What's new?_
+
+- Fix typo
+- Add examples
+- Update GitGuardian case
+
 ## v0.0.2 [2022-10-08]
 
 _What's new?_
