@@ -14,6 +14,9 @@ func tableGitguardianMember(ctx context.Context) *plugin.Table {
 		Description: "List members of the workspace.",
 		List: &plugin.ListConfig{
 			Hydrate: listMember,
+			KeyColumns: []*plugin.KeyColumn{
+				{Name: "role", Require: plugin.Optional},
+			},
 		},
 		Columns: []*plugin.Column{
 			{
@@ -52,6 +55,8 @@ func listMember(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 		return nil, err
 	}
 	perPage := 100
+	quals := d.KeyColumnQuals
+	role := quals["role"].GetStringValue()
 
 	if d.QueryContext.Limit != nil && *d.QueryContext.Limit < int64(perPage) {
 		perPage = int(*d.QueryContext.Limit)
@@ -59,6 +64,7 @@ func listMember(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 
 	opts := members.ListOptions{
 		PerPage: &perPage,
+		Role:    members.MembersListRole(role),
 	}
 
 	for {
