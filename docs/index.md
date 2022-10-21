@@ -66,6 +66,7 @@ connection "gitguardian" {
   # Scope:
   #  - incidents:read
   #  - audit_logs:read
+  #  - members:read
   # token = ""
 }
 ```
