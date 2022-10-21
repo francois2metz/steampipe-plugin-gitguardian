@@ -13,7 +13,7 @@ func tableGitguardianAuditLog(ctx context.Context) *plugin.Table {
 		Name:        "gitguardian_audit_log",
 		Description: "List audit logs.",
 		List: &plugin.ListConfig{
-			Hydrate:    listAuditLog,
+			Hydrate: listAuditLog,
 			KeyColumns: []*plugin.KeyColumn{
 				{Name: "date", Operators: []string{">", ">=", "=", "<", "<="}, Require: plugin.Optional},
 				{Name: "event_name", Require: plugin.Optional},
@@ -101,9 +101,9 @@ func listAuditLog(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateDat
 	}
 
 	opts := auditlogs.AuditLogsListOptions{
-		PerPage: &perPage,
-		EventName: eventName,
-		MemberName: memberName,
+		PerPage:     &perPage,
+		EventName:   eventName,
+		MemberName:  memberName,
 		MemberEmail: memberEmail,
 	}
 	if memberId != nil {
