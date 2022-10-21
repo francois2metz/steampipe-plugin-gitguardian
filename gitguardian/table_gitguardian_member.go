@@ -18,6 +18,10 @@ func tableGitguardianMember(ctx context.Context) *plugin.Table {
 				{Name: "role", Require: plugin.Optional},
 			},
 		},
+		Get: &plugin.GetConfig{
+			KeyColumns: plugin.SingleColumn("id"),
+			Hydrate:    getMember,
+		},
 		Columns: []*plugin.Column{
 			{
 				Name:        "id",
@@ -85,4 +89,26 @@ func listMember(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData)
 		}
 	}
 	return nil, nil
+}
+
+func getMember(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateData) (interface{}, error) {
+	client, err := connect(ctx, d)
+	if err != nil {
+		plugin.Logger(ctx).Error("gitguardian_member.getMember", "connection_error", err)
+		return nil, err
+	}
+	c, err := members.NewClient(client)
+	if err != nil {
+		plugin.Logger(ctx).Error("gitguardian_member.getMember", "connection_error", err)
+		return nil, err
+	}
+
+	id := d.KeyColumnQuals["id"].GetInt64Value()
+
+	result, err := c.Get(int(id))
+	if err != nil {
+		plugin.Logger(ctx).Error("gitguardian_member.getMember", err)
+		return nil, err
+	}
+	return result.Result, nil
 }
