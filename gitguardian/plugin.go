@@ -16,6 +16,7 @@ func Plugin(ctx context.Context) *plugin.Plugin {
 		},
 		TableMap: map[string]*plugin.Table{
 			"gitguardian_audit_log":       tableGitguardianAuditLog(ctx),
+			"gitguardian_member":          tableGitguardianMember(ctx),
 			"gitguardian_secret_incident": tableGitguardianSecretIncident(ctx),
 			"gitguardian_source":          tableGitguardianSource(ctx),
 		},
