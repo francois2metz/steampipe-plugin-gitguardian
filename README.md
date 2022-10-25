@@ -1,3 +1,5 @@
+![Steampipe + GitGuardian](docs/gitguardian-social-graphic.png)
+
 # GitGuardian plugin for Steampipe
 
 Use SQL to query incidents from [GitGuardian][].
