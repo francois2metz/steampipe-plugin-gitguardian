@@ -1,3 +1,9 @@
+## v0.0.4 [2022-11-04]
+
+_What's new?_
+
+- Add `gitguardian_member` table (this require a new permission scope: members:read)
+
 ## v0.0.3 [2022-10-20]
 
 _What's new?_
@@ -11,7 +17,7 @@ _What's new?_
 _What's new?_
 
 - Limit PerPage setting when using a LIMIT clause
-- Add `gitguardian_audit_log` table (this require a new permission scope: audit_logs:read
+- Add `gitguardian_audit_log` table (this require a new permission scope: audit_logs:read)
 
 ## v0.0.1 [2022-10-07]
 
