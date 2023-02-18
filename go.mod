@@ -3,7 +3,7 @@ module github.com/francois2metz/steampipe-plugin-gitguardian
 go 1.19
 
 require (
-	github.com/Gaardsholt/go-gitguardian v0.1.1-0.20221023111959-b80e317bb96f
+	github.com/Gaardsholt/go-gitguardian v0.3.5
 	github.com/turbot/steampipe-plugin-sdk/v5 v5.1.4
 )
 
@@ -66,7 +66,7 @@ require (
 	github.com/oklog/run v1.0.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
 	github.com/pegasus-kv/thrift v0.13.0 // indirect
-	github.com/peterhellberg/link v1.1.0 // indirect
+	github.com/peterhellberg/link v1.2.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/client_golang v1.12.2 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
