@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/Gaardsholt/go-gitguardian/auditlogs"
-	"github.com/turbot/steampipe-plugin-sdk/v4/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
 )
 
 func tableGitguardianAuditLog(ctx context.Context) *plugin.Table {
@@ -89,7 +89,7 @@ func listAuditLog(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateDat
 		return nil, err
 	}
 	perPage := 100
-	quals := d.KeyColumnQuals
+	quals := d.EqualsQuals
 	eventName := quals["event_name"].GetStringValue()
 	memberId := quals["member_id"]
 	memberName := quals["member_name"].GetStringValue()
@@ -138,7 +138,7 @@ func listAuditLog(ctx context.Context, d *plugin.QueryData, h *plugin.HydrateDat
 			break
 		}
 		opts.Cursor = pagination.NextCursor
-		if d.QueryStatus.RowsRemaining(ctx) <= 0 {
+		if d.RowsRemaining(ctx) <= 0 {
 			break
 		}
 	}

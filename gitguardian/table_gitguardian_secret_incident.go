@@ -4,9 +4,9 @@ import (
 	"context"
 
 	"github.com/Gaardsholt/go-gitguardian/incidents"
-	"github.com/turbot/steampipe-plugin-sdk/v4/grpc/proto"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin"
-	"github.com/turbot/steampipe-plugin-sdk/v4/plugin/transform"
+	"github.com/turbot/steampipe-plugin-sdk/v5/grpc/proto"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin"
+	"github.com/turbot/steampipe-plugin-sdk/v5/plugin/transform"
 )
 
 func tableGitguardianSecretIncident(ctx context.Context) *plugin.Table {
@@ -125,7 +125,7 @@ func listSecretIncident(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 		return nil, err
 	}
 	perPage := 100
-	quals := d.KeyColumnQuals
+	quals := d.EqualsQuals
 	assigneeEmail := quals["assignee_email"].GetStringValue()
 	status := incidents.IncidentsListStatus(quals["status"].GetStringValue())
 	severity := incidents.IncidentsListSeverity(quals["severity"].GetStringValue())
@@ -170,7 +170,7 @@ func listSecretIncident(ctx context.Context, d *plugin.QueryData, h *plugin.Hydr
 			break
 		}
 		opts.Cursor = pagination.NextCursor
-		if d.QueryStatus.RowsRemaining(ctx) <= 0 {
+		if d.RowsRemaining(ctx) <= 0 {
 			break
 		}
 	}
@@ -189,7 +189,7 @@ func getSecretIncident(ctx context.Context, d *plugin.QueryData, h *plugin.Hydra
 		return nil, err
 	}
 
-	id := d.KeyColumnQuals["id"].GetInt64Value()
+	id := d.EqualsQuals["id"].GetInt64Value()
 
 	result, err := c.Get(int(id), incidents.GetOptions{})
 	if err != nil {
