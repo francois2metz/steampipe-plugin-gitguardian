@@ -1,3 +1,10 @@
+## v0.0.5 [2023-07-23]
+
+_What's new?_
+
+- Update steampipe sdk to v5
+- Update go-gitguardian to v0.3.6
+
 ## v0.0.4 [2022-11-04]
 
 _What's new?_
