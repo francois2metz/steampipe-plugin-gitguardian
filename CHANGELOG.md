@@ -1,3 +1,9 @@
+## v0.1.0 [2023-07-30]
+
+_What's new?_
+
+- Add `detector_name`, `detector_display_name`, `detector_nature`, `detector_family`, `detector_group_name`, `detector_group_display_name` to the `gitguardian_secret_incident` table. Thanks [@orf](https://github.com/orf).
+
 ## v0.0.5 [2023-07-23]
 
 _What's new?_
