@@ -39,6 +39,42 @@ func tableGitguardianSecretIncident(ctx context.Context) *plugin.Table {
 				Description: "Last trigger date.",
 			},
 			{
+				Name:        "detector_name",
+				Type:        proto.ColumnType_STRING,
+				Description: "Name of the detector.",
+				Transform:   transform.FromField("Detector.Name"),
+			},
+			{
+				Name:        "detector_display_name",
+				Type:        proto.ColumnType_STRING,
+				Description: "Display of the detector.",
+				Transform:   transform.FromField("Detector.DisplayName"),
+			},
+			{
+				Name:        "detector_nature",
+				Type:        proto.ColumnType_STRING,
+				Description: "Nature of the detector.",
+				Transform:   transform.FromField("Detector.Nature"),
+			},
+			{
+				Name:        "detector_family",
+				Type:        proto.ColumnType_STRING,
+				Description: "Family of the detector.",
+				Transform:   transform.FromField("Detector.Family"),
+			},
+			{
+				Name:        "detector_group_name",
+				Type:        proto.ColumnType_STRING,
+				Description: "Group name of the detector.",
+				Transform:   transform.FromField("Detector.DetectorGroupName"),
+			},
+			{
+				Name:        "detector_group_display_name",
+				Type:        proto.ColumnType_STRING,
+				Description: "Group display name of the detector.",
+				Transform:   transform.FromField("Detector.DetectorGroupDisplayName"),
+			},
+			{
 				Name:        "secret_hash",
 				Type:        proto.ColumnType_STRING,
 				Description: "Unique hash.",
