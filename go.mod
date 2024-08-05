@@ -6,7 +6,7 @@ toolchain go1.21.3
 
 require (
 	github.com/Gaardsholt/go-gitguardian v0.3.6
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.1
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.2
 )
 
 require (
