@@ -4,7 +4,7 @@ go 1.22.6
 
 require (
 	github.com/Gaardsholt/go-gitguardian v0.3.6
-	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.2
+	github.com/turbot/steampipe-plugin-sdk/v5 v5.10.3
 )
 
 require (
