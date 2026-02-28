@@ -1,6 +1,6 @@
 module github.com/francois2metz/steampipe-plugin-gitguardian
 
-go 1.24.0
+go 1.26
 
 require (
 	github.com/Gaardsholt/go-gitguardian v0.3.6
